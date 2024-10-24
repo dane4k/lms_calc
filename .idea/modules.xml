@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/lmscalculator.iml" filepath="$PROJECT_DIR$/.idea/lmscalculator.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/lmscalc.iml" filepath="$PROJECT_DIR$/.idea/lmscalc.iml" />
+>>>>>>> 3abc6587ac52f6b7a3a71b1c5def01f28586747b
     </modules>
   </component>
 </project>
