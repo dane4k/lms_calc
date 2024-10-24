@@ -8,8 +8,7 @@ import (
 )
 
 func main() {
-	expression := "1 + 2 * (3+4/2 - (1+2))*2+1"
-
+	expression := ""
 	result, err := Calc(expression)
 	fmt.Println(result, err)
 
@@ -63,12 +62,28 @@ func Calc(expression string) (float64, error) {
 	var digitsStack Stack[float64]
 	var operatorsStack Stack[rune]
 
+	if len(expression) == 0 {
+		return 0, InvalidExpressionError
+	}
+	if _, ok := OperatorsMap[rune(expression[len(expression)-1])]; ok {
+		return 0, InvalidExpressionError
+	}
 	exprSlice := []rune(strings.Replace(expression, " ", "", -1))
+
+	lastIsOperator := true
 
 	for _, ch := range exprSlice {
 		if unicode.IsDigit(ch) {
 			digitsStack.Push(float64(ch - '0'))
+			lastIsOperator = false
 		} else if strings.ContainsAny(string(ch), "+-/*()") {
+			if _, ok := OperatorsMap[ch]; ok {
+				if lastIsOperator {
+					return 0, InvalidExpressionError
+				}
+				lastIsOperator = true
+			}
+
 			if ch == '(' {
 				operatorsStack.Push(ch)
 			} else if ch == ')' {
